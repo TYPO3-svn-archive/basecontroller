@@ -30,7 +30,7 @@
  * @subpackage	tx_basecontroller
  */
 interface tx_basecontroller_dataconsumer {
-	
+
 	/**
 	 * This method returns the type of data structure that the Data Consumer can use
 	 *
@@ -45,6 +45,15 @@ interface tx_basecontroller_dataconsumer {
 	 * @return	boolean		true if it can use the requested type, false otherwise
 	 */
 	public function acceptsDataStructure($type);
+
+	/**
+	 * This method is used to load the details about the Data Consumer passing it whatever data it needs
+	 * This will generally be a table name and a primary key value
+	 *
+	 * @param	array	$data: Data for the Data Consumer
+	 * @return	void
+	 */
+	public function loadConsumerData($data);
 
 	/**
 	 * This method is used to pass a data structure to the Data Consumer

@@ -47,6 +47,15 @@ interface tx_basecontroller_dataprovider {
 	public function providesDataStructure($type);
 
 	/**
+	 * This method is used to load the details about the Data Provider passing it whatever data it needs
+	 * This will generally be a table name and a primary key value
+	 *
+	 * @param	array	$data: Data for the Data Provider
+	 * @return	void
+	 */
+	public function loadProviderData($data);
+
+	/**
 	 * This method assembles the data structure and returns it
 	 *
 	 * @return	array	standardised data structure

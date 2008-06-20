@@ -34,6 +34,8 @@
  * @author	Francois Suter (Cobweb) <typo3@cobweb.ch>
  * @package	TYPO3
  * @subpackage	tx_basecontroller
+ *
+ * $Id: $
  */
 class tx_basecontroller {
 
@@ -55,32 +57,9 @@ class tx_basecontroller {
 			if ($numProviders == 2) {
 			}
 				// Get the primary provider
-t3lib_div::debug($providers[0]);
 			$primaryProvider = t3lib_div::makeInstanceService('dataprovider', $providers[0]['tablenames']);
-t3lib_div::debug($primaryProvider);
-/*
-$primaryProvider = $this->getSingleDataProvider($row['tablenames'], $row['uid_foreign']);
-t3lib_div::debug($primaryProvider);
-*/
-		}
-	}
-
-	/**
-	 * This method instatiates a data provider object and returns it
-	 *
-	 * @param	string		$type: type of data provider (should correspond to a database table)
-	 * @param	integer		$uid: primary key of the data provider record
-	 * @return	object		object with a DataProvider interface
-	 */
-	protected function getSingleDataProvider($type, $uid) {
-		if (isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$this->extKey]['providers'][$type])) {
-			require_once($GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$this->extKey]['providers'][$type]);
-			$provider = t3lib_div::makeInstance($type);
-			return $provider;
-		}
-		else {
-				// Issue error
-			return false;
+			$primaryProvider->loadProviderData($providers[0]);
+			return $primaryProvider;
 		}
 	}
 }

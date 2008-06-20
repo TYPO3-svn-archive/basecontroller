@@ -33,6 +33,27 @@ require_once(t3lib_extMgm::extPath('basecontroller', 'interfaces/class.tx_baseco
  * @subpackage	tx_basecontroller
  */
 abstract class tx_basecontroller_providerbase extends t3lib_svbase implements tx_basecontroller_dataprovider {
+	protected $providerData = array();
+
+// Data Provider interface methods
+// (implement only methods that make sense here
+
+	/**
+	 * This method is used to load the details about the Data Provider passing it whatever data it needs
+	 * This will generally be a table name (stored in $data['tablenames']) and a primary key value (stored in $data['uid_foreign'])
+	 *
+	 * @param	array	$data: Data for the Data Provider
+	 * @return	void
+	 */
+	public function loadProviderData($data) {
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', $data['tablenames'], "uid = '".$data['uid_foreign']."'");
+		if ($res) {
+			$this->providerData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+		}
+		else {
+			// An error occurred querying the database
+		}
+	}
 }
 
 
