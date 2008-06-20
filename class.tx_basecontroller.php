@@ -55,8 +55,9 @@ class tx_basecontroller {
 			if ($numProviders == 2) {
 			}
 				// Get the primary provider
-			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-t3lib_div::debug($row);
+t3lib_div::debug($providers[0]);
+			$primaryProvider = t3lib_div::makeInstanceService('dataprovider', $providers[0]['tablenames']);
+t3lib_div::debug($primaryProvider);
 /*
 $primaryProvider = $this->getSingleDataProvider($row['tablenames'], $row['uid_foreign']);
 t3lib_div::debug($primaryProvider);

@@ -23,6 +23,7 @@
 ***************************************************************/
 
 require_once(PATH_t3lib.'class.t3lib_svbase.php');
+require_once(t3lib_extMgm::extPath('basecontroller', 'interfaces/class.tx_basecontroller_dataprovider.php'));
 
 /**
  * Base dataprovider service. All Data Provider services should inherit from this class
@@ -31,7 +32,7 @@ require_once(PATH_t3lib.'class.t3lib_svbase.php');
  * @package	TYPO3
  * @subpackage	tx_basecontroller
  */
-abstract class tx_basecontroller_dataprovider extends t3lib_svbase {
+abstract class tx_basecontroller_providerbase extends t3lib_svbase implements tx_basecontroller_dataprovider {
 }
 
 
