@@ -38,6 +38,9 @@
  * $Id: $
  */
 class tx_basecontroller {
+	public static $recordsetStructureType = 'recordset';
+	public static $idlistStructureType = 'idlist';
+	public static $treeStructureType = 'tree';
 
 	/**
 	 * This method gets the data provider
@@ -58,9 +61,24 @@ class tx_basecontroller {
 			}
 				// Get the primary provider
 			$primaryProvider = t3lib_div::makeInstanceService('dataprovider', $providers[0]['tablenames']);
-			$primaryProvider->loadProviderData($providers[0]);
+			$providerData = array('table' => $providers[0]['tablenames'], 'uid' => $providers[0]['uid_foreign']);
+			$primaryProvider->loadProviderData($providerData);
 			return $primaryProvider;
 		}
+	}
+
+	/**
+	 * This method gets the data consumer
+	 *
+	 * @param	array	$consumer: consumer database record
+	 * @return	object	object with a DataProvider interface
+	 */
+	public function getDataConsumer($consumer) {
+			// Get the related data consumer
+		$consumerObject = t3lib_div::makeInstanceService('dataconsumer', $consumer['tablenames']);
+		$consumerData = array('table' => $consumer['tablenames'], 'uid' => $consumer['uid_foreign']);
+		$consumerObject->loadConsumerData($consumerData);
+		return $consumerObject;
 	}
 }
 

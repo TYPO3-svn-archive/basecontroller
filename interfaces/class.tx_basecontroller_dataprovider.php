@@ -48,7 +48,7 @@ interface tx_basecontroller_dataprovider {
 
 	/**
 	 * This method is used to load the details about the Data Provider passing it whatever data it needs
-	 * This will generally be a table name and a primary key value
+	 * This will generally be a table name ($data['table']) and a primary key value ($data['uid'])
 	 *
 	 * @param	array	$data: Data for the Data Provider
 	 * @return	void
