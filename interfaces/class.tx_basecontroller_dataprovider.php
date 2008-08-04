@@ -70,6 +70,6 @@ interface tx_basecontroller_dataprovider {
      *
      * @return	array	list of tables and fields
      */
-	public function getTablesAndFields($language = '') {}
+	public function getTablesAndFields($language = '');
 }
 ?>
