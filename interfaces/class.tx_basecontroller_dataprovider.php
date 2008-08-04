@@ -61,5 +61,15 @@ interface tx_basecontroller_dataprovider {
 	 * @return	array	standardised data structure
 	 */
 	public function getDataStructure();
+
+	/**
+     * This method returns a list of tables and fields available in the data structure,
+     * complete with localized labels
+     *
+     * @param	string	$language: 2-letter iso code for language
+     *
+     * @return	array	list of tables and fields
+     */
+	public function getTablesAndFields($language = '') {}
 }
 ?>
