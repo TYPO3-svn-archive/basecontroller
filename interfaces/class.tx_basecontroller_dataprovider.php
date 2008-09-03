@@ -20,6 +20,8 @@
 *  GNU General Public License for more details.
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
+*
+* $Id: $
 ***************************************************************/
 
 /**
@@ -67,9 +69,16 @@ interface tx_basecontroller_dataprovider {
      * complete with localized labels
      *
      * @param	string	$language: 2-letter iso code for language
-     *
      * @return	array	list of tables and fields
      */
 	public function getTablesAndFields($language = '');
+
+	/**
+	 * This method is used to pass a Data Filter structure to the Data Consumer
+	 *
+	 * @param	DataFilter	$filter: Data Filter structure
+	 * @return	void
+	 */
+	public function setDataFilter($filter);
 }
 ?>
