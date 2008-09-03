@@ -21,7 +21,7 @@
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 *
-* $Id: $
+* $Id$
 ***************************************************************/
 
 require_once(PATH_t3lib.'class.t3lib_svbase.php');
