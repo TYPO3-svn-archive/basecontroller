@@ -49,13 +49,28 @@ interface tx_basecontroller_dataprovider {
 	public function providesDataStructure($type);
 
 	/**
+	 * This method returns the type of data structure that the Data Provider can receive as input
+	 *
+	 * @return	string	type of used data structures
+	 */
+	public function getAcceptedDataStructure();
+
+	/**
+	 * This method indicates whether the Data Provider can use as input the type of data structure requested or not
+	 *
+	 * @param	string		$type: type of data structure
+	 * @return	boolean		true if it can use the requested type, false otherwise
+	 */
+	public function acceptsDataStructure($type);
+
+	/**
 	 * This method is used to load the details about the Data Provider passing it whatever data it needs
 	 * This will generally be a table name ($data['table']) and a primary key value ($data['uid'])
 	 *
 	 * @param	array	$data: Data for the Data Provider
 	 * @return	void
 	 */
-	public function loadProviderData($data);
+	public function loadData($data);
 
 	/**
 	 * This method assembles the data structure and returns it
@@ -65,6 +80,22 @@ interface tx_basecontroller_dataprovider {
 	public function getDataStructure();
 
 	/**
+	 * This method is used to pass a data structure to the Data Provider
+	 *
+	 * @param 	array	$structure: standardised data structure
+	 * @return	void
+	 */
+	public function setDataStructure($structure);
+
+	/**
+	 * This method is used to pass a Data Filter structure to the Data Provider
+	 *
+	 * @param	DataFilter	$filter: Data Filter structure
+	 * @return	void
+	 */
+	public function setDataFilter($filter);
+
+	/**
      * This method returns a list of tables and fields available in the data structure,
      * complete with localized labels
      *
@@ -72,13 +103,5 @@ interface tx_basecontroller_dataprovider {
      * @return	array	list of tables and fields
      */
 	public function getTablesAndFields($language = '');
-
-	/**
-	 * This method is used to pass a Data Filter structure to the Data Consumer
-	 *
-	 * @param	DataFilter	$filter: Data Filter structure
-	 * @return	void
-	 */
-	public function setDataFilter($filter);
 }
 ?>

@@ -60,11 +60,18 @@ class tx_basecontroller {
 		else {
 				// TODO: If there's a secondary provider, instantiate it first, as it will feed the primary provider
 			if ($numProviders == 2) {
+				$secondaryProvider = t3lib_div::makeInstanceService('dataprovider', $providers[1]['tablenames']);
+				$providerData = array('table' => $providers[1]['tablenames'], 'uid' => $providers[1]['uid_foreign']);
+				$secondaryProvider->loadProviderData($providerData);
+				$inputDataStructure = $secondaryProvider->getProvidedDataStructure();
 			}
 				// Get the primary provider
 			$primaryProvider = t3lib_div::makeInstanceService('dataprovider', $providers[0]['tablenames']);
 			$providerData = array('table' => $providers[0]['tablenames'], 'uid' => $providers[0]['uid_foreign']);
 			$primaryProvider->loadProviderData($providerData);
+				// Load the primary provider with the data from the secondary provider
+			if (isset($primaryProvider)) {
+			}
 			return $primaryProvider;
 		}
 	}

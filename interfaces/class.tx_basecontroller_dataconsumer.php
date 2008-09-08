@@ -55,7 +55,7 @@ interface tx_basecontroller_dataconsumer {
 	 * @param	array	$data: Data for the Data Consumer
 	 * @return	void
 	 */
-	public function loadConsumerData($data);
+	public function loadData($data);
 
 	/**
 	 * This method is used to pass a data structure to the Data Consumer
@@ -64,6 +64,14 @@ interface tx_basecontroller_dataconsumer {
 	 * @return	void
 	 */
 	public function setDataStructure($structure);
+
+	/**
+	 * This method is used to pass a Data Filter structure to the Data Consumer
+	 *
+	 * @param	DataFilter	$filter: Data Filter structure
+	 * @return	void
+	 */
+	public function setDataFilter($filter);
 
 	/**
 	 * This method starts whatever rendering process the Data Consumer is programmed to do
