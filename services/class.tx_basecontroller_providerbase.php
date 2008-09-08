@@ -47,7 +47,7 @@ abstract class tx_basecontroller_providerbase extends t3lib_svbase implements tx
 	 * @param	array	$data: Data for the Data Provider
 	 * @return	void
 	 */
-	public function loadProviderData($data) {
+	public function loadData($data) {
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', $data['tablenames'], "uid = '".$data['uid_foreign']."'");
 		if ($res) {
 			$this->providerData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);

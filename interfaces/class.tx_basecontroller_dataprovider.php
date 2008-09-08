@@ -90,7 +90,7 @@ interface tx_basecontroller_dataprovider {
 	/**
 	 * This method is used to pass a Data Filter structure to the Data Provider
 	 *
-	 * @param	DataFilter	$filter: Data Filter structure
+	 * @param	array	$filter: Data Filter structure
 	 * @return	void
 	 */
 	public function setDataFilter($filter);

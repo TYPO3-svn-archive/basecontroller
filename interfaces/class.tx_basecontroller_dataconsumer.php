@@ -68,7 +68,7 @@ interface tx_basecontroller_dataconsumer {
 	/**
 	 * This method is used to pass a Data Filter structure to the Data Consumer
 	 *
-	 * @param	DataFilter	$filter: Data Filter structure
+	 * @param	array	$filter: Data Filter structure
 	 * @return	void
 	 */
 	public function setDataFilter($filter);
