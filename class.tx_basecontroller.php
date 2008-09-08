@@ -62,15 +62,17 @@ class tx_basecontroller {
 			if ($numProviders == 2) {
 				$secondaryProvider = t3lib_div::makeInstanceService('dataprovider', $providers[1]['tablenames']);
 				$providerData = array('table' => $providers[1]['tablenames'], 'uid' => $providers[1]['uid_foreign']);
-				$secondaryProvider->loadProviderData($providerData);
-				$inputDataStructure = $secondaryProvider->getProvidedDataStructure();
+				$secondaryProvider->loadData($providerData);
 			}
 				// Get the primary provider
 			$primaryProvider = t3lib_div::makeInstanceService('dataprovider', $providers[0]['tablenames']);
 			$providerData = array('table' => $providers[0]['tablenames'], 'uid' => $providers[0]['uid_foreign']);
-			$primaryProvider->loadProviderData($providerData);
-				// Load the primary provider with the data from the secondary provider
-			if (isset($primaryProvider)) {
+			$primaryProvider->loadData($providerData);
+				// Load the primary provider with the data from the secondary provider, if compatible
+				// TODO: issue error, if not compatible
+			if (isset($secondaryProvider) && $primaryProvider->acceptsDataStructure($secondaryProvider->getProvidedDataStructure())) {
+				$inputDataStructure = $secondaryProvider->getProvidedDataStructure();
+				$primaryProvider->setDataStructure($inputDataStructure);
 			}
 			return $primaryProvider;
 		}
@@ -86,7 +88,7 @@ class tx_basecontroller {
 			// Get the related data consumer
 		$consumerObject = t3lib_div::makeInstanceService('dataconsumer', $consumer['tablenames']);
 		$consumerData = array('table' => $consumer['tablenames'], 'uid' => $consumer['uid_foreign']);
-		$consumerObject->loadConsumerData($consumerData);
+		$consumerObject->loadData($consumerData);
 		return $consumerObject;
 	}
 }
