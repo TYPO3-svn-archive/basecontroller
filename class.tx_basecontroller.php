@@ -71,7 +71,7 @@ class tx_basecontroller {
 				// Load the primary provider with the data from the secondary provider, if compatible
 				// TODO: issue error, if not compatible
 			if (isset($secondaryProvider) && $primaryProvider->acceptsDataStructure($secondaryProvider->getProvidedDataStructure())) {
-				$inputDataStructure = $secondaryProvider->getProvidedDataStructure();
+				$inputDataStructure = $secondaryProvider->getDataStructure();
 				$primaryProvider->setDataStructure($inputDataStructure);
 			}
 			return $primaryProvider;
