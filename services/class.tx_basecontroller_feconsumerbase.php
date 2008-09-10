@@ -21,35 +21,33 @@
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 *
-* $Id$
+* $Id: class.tx_basecontroller_consumerbase.php 11676 2008-09-03 11:44:03Z francois $
 ***************************************************************/
 
-require_once(PATH_t3lib.'class.t3lib_svbase.php');
-require_once(t3lib_extMgm::extPath('basecontroller', 'interfaces/class.tx_basecontroller_dataconsumer.php'));
+require_once(t3lib_extMgm::extPath('basecontroller', 'services/class.tx_basecontroller_consumerbase.php'));
 
 /**
- * Base dataconsumer service. Data Consumer services should inherit from this class, *except* FE Data Consumer services,
- * which should inherit from derived class tx_basecontroller_feconsumerbase
+ * Base FE dataconsumer service. All FE Data Consumer services should inherit from this class
  *
  * @author	Francois Suter (Cobweb) <typo3@cobweb.ch>
  * @package	TYPO3
  * @subpackage	tx_basecontroller
  */
-abstract class tx_basecontroller_consumerbase extends t3lib_svbase implements tx_basecontroller_dataconsumer {
-	protected $pObj; // Reference to the consumer's parent object, normally some kind of controller
+abstract class tx_basecontroller_feconsumerbase extends tx_basecontroller_consumerbase {
+	protected $conf; // Contains the consumer's TypoScript
 
 	/**
-	 * This method is used to set a reference to the parent object, normally an instance of some controller
+	 * This method is used to pass a TypoScript configuration (in array form) to the Data Consumer
 	 *
-	 * @param	object	$pObj: reference to a parent object
+	 * @param	array	$conf: TypoScript configuration for the extension
 	 */
-	public function setParentReference(&$pObj) {
-		if (is_object($pObj)) $this->pObj = $pObj;
+	public function setTypoScript($conf) {
+		$this->conf = $conf;
 	}
 }
 
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/tx_basecontroller/class.tx_basecontroller_dataconsumer.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/tx_basecontroller/class.tx_basecontroller_dataconsumer.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/tx_basecontroller/class.tx_basecontroller_fedataconsumer.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/tx_basecontroller/class.tx_basecontroller_fedataconsumer.php']);
 }
 ?>
