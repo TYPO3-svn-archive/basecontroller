@@ -35,10 +35,12 @@ require_once(t3lib_extMgm::extPath('basecontroller', 'interfaces/class.tx_baseco
  * @subpackage	tx_basecontroller
  */
 abstract class tx_basecontroller_providerbase extends t3lib_svbase implements tx_basecontroller_dataprovider {
+	protected $table; // Name of the table where the details about the provider are stored
+	protected $uid; // Primary key of the record to fetch for the details
 	protected $providerData = array();
 
 // Data Provider interface methods
-// (implement only methods that make sense here
+// (implement only methods that make sense here)
 
 	/**
 	 * This method is used to load the details about the Data Provider passing it whatever data it needs
@@ -48,12 +50,19 @@ abstract class tx_basecontroller_providerbase extends t3lib_svbase implements tx
 	 * @return	void
 	 */
 	public function loadData($data) {
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', $data['tablenames'], "uid = '".$data['uid_foreign']."'");
-		if ($res) {
-			$this->providerData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+		$this->table = $data['table'];
+		$this->uid = $data['uid'];
+		$tableTCA = $GLOBALS['TCA'][$this->table];
+		$whereClause = "uid = '".$this->uid."'";
+		if (isset($GLOBALS['TSFE'])) {
+			$whereClause .= $GLOBALS['TSFE']->sys_page->enableFields($this->table, $GLOBALS['TSFE']->showHiddenRecords);
+		}
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', $this->table, $whereClause);
+		if (!$res || $GLOBALS['TYPO3_DB']->sql_num_rows($res) == 0) {
+			throw new Exception('Could not load provider details');
 		}
 		else {
-			// An error occurred querying the database
+			$this->providerData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 		}
 	}
 }

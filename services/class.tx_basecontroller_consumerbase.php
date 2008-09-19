@@ -36,7 +36,35 @@ require_once(t3lib_extMgm::extPath('basecontroller', 'interfaces/class.tx_baseco
  * @subpackage	tx_basecontroller
  */
 abstract class tx_basecontroller_consumerbase extends t3lib_svbase implements tx_basecontroller_dataconsumer {
+	protected $table; // Name of the table where the details about the consumer are stored
+	protected $uid; // Primary key of the record to fetch for the details
+	protected $consumerData = array();
 	protected $pObj; // Reference to the consumer's parent object, normally some kind of controller
+
+	/**
+	 * This method is used to load the details about the Data Consumer passing it whatever data it needs
+	 * This will generally be a table name and a primary key value
+	 *
+	 * @param	array	$data: Data for the Data Consumer
+	 * @return	void
+	 */
+	public function loadData($data) {
+		$this->table = $data['table'];
+		$this->uid = $data['uid'];
+			// Get record where the details of the data display are stored
+		$tableTCA = $GLOBALS['TCA'][$this->table];
+		$whereClause = "uid = '".$this->uid."'";
+		if (isset($GLOBALS['TSFE'])) {
+			$whereClause .= $GLOBALS['TSFE']->sys_page->enableFields($this->table, $GLOBALS['TSFE']->showHiddenRecords);
+		}
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', $this->table, $whereClause);
+		if (!$res || $GLOBALS['TYPO3_DB']->sql_num_rows($res) == 0) {
+			throw new Exception('Could not load consumer details');
+		}
+		else {
+			$this->consumerData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+		}
+	}
 
 	/**
 	 * This method is used to set a reference to the parent object, normally an instance of some controller

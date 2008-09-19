@@ -58,15 +58,16 @@ class tx_basecontroller {
 			// No provider, issue error
 		}
 		else {
-				// TODO: If there's a secondary provider, instantiate it first, as it will feed the primary provider
 			if ($numProviders == 2) {
 				$secondaryProvider = t3lib_div::makeInstanceService('dataprovider', $providers[1]['tablenames']);
 				$providerData = array('table' => $providers[1]['tablenames'], 'uid' => $providers[1]['uid_foreign']);
+					// NOTE: loadData() may throw an exception, but we just let it pass at this point
 				$secondaryProvider->loadData($providerData);
 			}
 				// Get the primary provider
 			$primaryProvider = t3lib_div::makeInstanceService('dataprovider', $providers[0]['tablenames']);
 			$providerData = array('table' => $providers[0]['tablenames'], 'uid' => $providers[0]['uid_foreign']);
+				// NOTE: loadData() may throw an exception, but we just let it pass at this point
 			$primaryProvider->loadData($providerData);
 				// Load the primary provider with the data from the secondary provider, if compatible
 				// TODO: issue error, if not compatible
@@ -88,8 +89,24 @@ class tx_basecontroller {
 			// Get the related data consumer
 		$consumerObject = t3lib_div::makeInstanceService('dataconsumer', $consumer['tablenames']);
 		$consumerData = array('table' => $consumer['tablenames'], 'uid' => $consumer['uid_foreign']);
+			// NOTE: loadData() may throw an exception, but we just let it pass at this point
 		$consumerObject->loadData($consumerData);
 		return $consumerObject;
+	}
+
+	/*
+	 * This method gets the advanced data filter
+	 *
+	 * @param	array	$filter: filter database record
+	 * @return	object	object with a DataFilter interface
+	 */
+	public function getDataFilter($filter) {
+			// Get the related data filter
+		$filterObject = t3lib_div::makeInstanceService('datafilter', $filter['tablenames']);
+		$filterData = array('table' => $filter['tablenames'], 'uid' => $filter['uid_foreign']);
+			// NOTE: loadData() may throw an exception, but we just let it pass at this point
+		$filterObject->loadData($filterData);
+		return $filterObject;
 	}
 }
 
