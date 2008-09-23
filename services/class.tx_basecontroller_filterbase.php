@@ -38,6 +38,7 @@ abstract class tx_basecontroller_filterbase extends t3lib_svbase implements tx_b
 	protected $table; // Name of the table where the details about the data query are stored
 	protected $uid; // Primary key of the record to fetch for the details
 	protected $filterData = array(); // Record from the database about the Data Filter
+	protected $vars = array(); // Local variables passed by the controller to the filter
 
 // Data Filter interface methods
 // (implement only methods that make sense here)

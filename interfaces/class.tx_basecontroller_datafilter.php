@@ -32,7 +32,6 @@
  * @subpackage	tx_basecontroller
  */
 interface tx_basecontroller_datafilter {
-	protected $vars = array(); // Local variables passed by the controller to the filter
 
 	/**
 	 * This method is used to load the details about the Data Filter passing it whatever data it needs
