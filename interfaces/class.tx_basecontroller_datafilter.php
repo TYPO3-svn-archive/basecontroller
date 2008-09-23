@@ -32,6 +32,7 @@
  * @subpackage	tx_basecontroller
  */
 interface tx_basecontroller_datafilter {
+	protected $vars = array(); // Local variables passed by the controller to the filter
 
 	/**
 	 * This method is used to load the details about the Data Filter passing it whatever data it needs
@@ -41,6 +42,15 @@ interface tx_basecontroller_datafilter {
 	 * @return	void
 	 */
 	public function loadData($data);
+
+	/**
+	 * This method can be used to pass to the Data Filter whatever local variables the controller has and make sense
+	 * In the case of a FE controller, it would be the piVars
+	 *
+	 * @param	array	$vars: array of values
+	 * @return	void
+	 */
+	public function setVars($vars);
 
 	/**
 	 * This method processes the Data Filter's configuration and returns the filter structure

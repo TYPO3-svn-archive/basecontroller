@@ -52,6 +52,29 @@ abstract class tx_basecontroller_filterbase extends t3lib_svbase implements tx_b
 	public function loadData($data) {
 		$this->table = $data['table'];
 		$this->uid = $data['uid'];
+		$tableTCA = $GLOBALS['TCA'][$this->table];
+		$whereClause = "uid = '".$this->uid."'";
+		if (isset($GLOBALS['TSFE'])) {
+			$whereClause .= $GLOBALS['TSFE']->sys_page->enableFields($this->table, $GLOBALS['TSFE']->showHiddenRecords);
+		}
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', $this->table, $whereClause);
+		if (!$res || $GLOBALS['TYPO3_DB']->sql_num_rows($res) == 0) {
+			throw new Exception('Could not load filter details');
+		}
+		else {
+			$this->filterData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+		}
+	}
+
+	/**
+	 * This method can be used to pass to the Data Filter whatever local variables the controller has and make sense
+	 * In the case of a FE controller, it would be the piVars
+	 *
+	 * @param	array	$vars: array of values
+	 * @return	void
+	 */
+	public function setVars($vars) {
+		if (is_array($vars)) $this->vars = $vars;
 	}
 }
 
