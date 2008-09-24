@@ -82,6 +82,7 @@ interface tx_basecontroller_dataconsumer {
 
 	/**
 	 * This method returns the result of the work done by the Data Consumer (FE output or whatever else)
+	 * or displays an error message if no structure was set
 	 *
 	 * @return	mixed	the result of the Data Consumer's work
 	 */
