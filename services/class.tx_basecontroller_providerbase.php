@@ -38,6 +38,7 @@ abstract class tx_basecontroller_providerbase extends t3lib_svbase implements tx
 	protected $table; // Name of the table where the details about the provider are stored
 	protected $uid; // Primary key of the record to fetch for the details
 	protected $providerData = array();
+	protected $filter; // Data Filter structure
 
 // Data Provider interface methods
 // (implement only methods that make sense here)
@@ -64,6 +65,16 @@ abstract class tx_basecontroller_providerbase extends t3lib_svbase implements tx
 		else {
 			$this->providerData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 		}
+	}
+
+	/**
+	 * This method is used to pass a Data Filter structure to the Data Provider
+	 *
+	 * @param	array		$filter: Data Filter structure
+	 * @return	void
+	 */
+	public function setDataFilter($filter) {
+		if (is_array($filter)) $this->filter = $filter;
 	}
 }
 

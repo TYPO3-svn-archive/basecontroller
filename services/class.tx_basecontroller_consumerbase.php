@@ -39,6 +39,7 @@ abstract class tx_basecontroller_consumerbase extends t3lib_svbase implements tx
 	protected $table; // Name of the table where the details about the consumer are stored
 	protected $uid; // Primary key of the record to fetch for the details
 	protected $consumerData = array();
+	protected $filter; // Data Filter structure
 	protected $pObj; // Reference to the consumer's parent object, normally some kind of controller
 
 	/**
@@ -64,6 +65,16 @@ abstract class tx_basecontroller_consumerbase extends t3lib_svbase implements tx
 		else {
 			$this->consumerData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 		}
+	}
+
+	/**
+	 * This method is used to pass a Data Filter structure to the Data Provider
+	 *
+	 * @param	array		$filter: Data Filter structure
+	 * @return	void
+	 */
+	public function setDataFilter($filter) {
+		if (is_array($filter)) $this->filter = $filter;
 	}
 
 	/**
