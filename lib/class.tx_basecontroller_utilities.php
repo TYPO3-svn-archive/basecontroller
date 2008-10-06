@@ -39,7 +39,7 @@
  *
  * $Id$
  */
-class tx_basecontroller_div {
+class tx_basecontroller_utilities {
 
 	/**
 	 * This method wraps messages before display
@@ -69,8 +69,8 @@ class tx_basecontroller_div {
 
 
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/basecontroller/class.tx_basecontroller.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/basecontroller/class.tx_basecontroller.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/basecontroller/lib/class.tx_basecontroller_utilities.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/basecontroller/lib/class.tx_basecontroller_utilities.php']);
 }
 
 ?>
