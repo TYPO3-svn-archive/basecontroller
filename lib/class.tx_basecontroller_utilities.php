@@ -65,6 +65,26 @@ class tx_basecontroller_utilities {
         }
 		return '<div class="'.$class.'" style="'.$style.'">'.$message.'</div>';
 	}
+
+	/**
+	 * This method can be used to calculate a hash based on the values of a given filter
+	 *
+	 * @param	array		$filter: standard filter structure
+	 * @param	boolean		$useLimit: by default, the "limit" part of the filter is excluded from the hash. Use this flag to include it
+	 */
+	public static function calculateFilterCacheHash($filter, $useLimit = false) {
+		if (is_array($filter)) {
+				// If limit is not used, exclude it from the hash calculation
+			if (!$useLimit) {
+				unset($filter['limit']);
+			}
+			$string = serialize($filter);
+			return md5($string);
+		}
+		else {
+			throw new Exception('Invalid filter provided. Could not calculate hash.');
+		}
+	}
 }
 
 

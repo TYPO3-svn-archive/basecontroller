@@ -39,6 +39,7 @@ abstract class tx_basecontroller_filterbase extends t3lib_svbase implements tx_b
 	protected $uid; // Primary key of the record to fetch for the details
 	protected $filterData = array(); // Record from the database about the Data Filter
 	protected $vars = array(); // Local variables passed by the controller to the filter
+	protected $filter; // Will contain the complete filter structure
 
 // Data Filter interface methods
 // (implement only methods that make sense here)
@@ -76,6 +77,18 @@ abstract class tx_basecontroller_filterbase extends t3lib_svbase implements tx_b
 	 */
 	public function setVars($vars) {
 		if (is_array($vars)) $this->vars = $vars;
+	}
+
+	/**
+	 * This method is used to pass to the DataFilter an existing filter structure, generally coming from some cache
+	 *
+	 * @param	array	$filter: an existing data filter structure
+	 * @return	void
+	 */
+	public function setFilter($filter) {
+		if (is_array($filter) && count($filter) > 0) {
+			$this->filter = $filter;
+		}
 	}
 }
 

@@ -57,5 +57,13 @@ interface tx_basecontroller_datafilter {
 	 * @return	array	standardised filter structure
 	 */
 	public function getFilter();
+
+	/**
+	 * This method is used to pass to the DataFilter an existing filter structure, generally coming from some cache
+	 *
+	 * @param	array	$filter: an existing data filter structure
+	 * @return	void
+	 */
+	public function setFilter($filter);
 }
 ?>
