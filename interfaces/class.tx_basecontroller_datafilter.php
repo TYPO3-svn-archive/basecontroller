@@ -21,7 +21,7 @@
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 *
-* $Id: class.tx_basecontroller_datafilter.php 11787 2008-09-08 13:54:56Z francois $
+* $Id$
 ***************************************************************/
 
 /**

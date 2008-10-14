@@ -21,7 +21,7 @@
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 *
-* $Id: class.tx_basecontroller_filterbase.php 11787 2008-09-08 13:54:56Z francois $
+* $Id$
 ***************************************************************/
 
 require_once(PATH_t3lib.'class.t3lib_svbase.php');
