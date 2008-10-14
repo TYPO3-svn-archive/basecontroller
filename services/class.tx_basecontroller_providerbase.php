@@ -38,7 +38,8 @@ abstract class tx_basecontroller_providerbase extends t3lib_svbase implements tx
 	protected $table; // Name of the table where the details about the provider are stored
 	protected $uid; // Primary key of the record to fetch for the details
 	protected $providerData = array();
-	protected $filter; // Data Filter structure
+	protected $filter = array(); // Data Filter structure
+	protected $structure = array(); // Input standardised data structure
 
 // Data Provider interface methods
 // (implement only methods that make sense here)
@@ -75,6 +76,25 @@ abstract class tx_basecontroller_providerbase extends t3lib_svbase implements tx
 	 */
 	public function setDataFilter($filter) {
 		if (is_array($filter)) $this->filter = $filter;
+	}
+
+// t3lib_svbase methods
+
+	/**
+	 * This method resets values for a number of properties
+	 * This is necessary because services are managed as singletons
+	 * 
+	 * NOTE: If you make your own implementation of reset in your DataProvider class, don't forget to call parent::reset()
+	 * 
+	 * @return	void
+	 */
+	public function reset() {
+		parent::reset();
+		$this->table = '';
+		$this->uid = '';
+		$this->providerData = array();
+		$this->filter = array();
+		$this->structure = array();
 	}
 }
 
