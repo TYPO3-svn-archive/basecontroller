@@ -40,9 +40,14 @@
  * $Id$
  */
 class tx_basecontroller {
+
+	// Define class constants for structure types
 	public static $recordsetStructureType = 'recordset';
 	public static $idlistStructureType = 'idlist';
 	public static $treeStructureType = 'tree';
+
+	// Define class constants for exception error codes
+	public static $errorIncompatiblePrimarySecondaryProviders = 1;
 
 	/**
 	 * This method gets the data provider
@@ -70,10 +75,22 @@ class tx_basecontroller {
 				// NOTE: loadData() may throw an exception, but we just let it pass at this point
 			$primaryProvider->loadData($providerData);
 				// Load the primary provider with the data from the secondary provider, if compatible
-				// TODO: issue error, if not compatible
-			if (isset($secondaryProvider) && $primaryProvider->acceptsDataStructure($secondaryProvider->getProvidedDataStructure())) {
-				$inputDataStructure = $secondaryProvider->getDataStructure();
-				$primaryProvider->setDataStructure($inputDataStructure);
+			if (isset($secondaryProvider)) {
+				if ($primaryProvider->acceptsDataStructure($secondaryProvider->getProvidedDataStructure())) {
+					$inputDataStructure = $secondaryProvider->getDataStructure();
+						// If the secondary provider returned no list of items, force primary provider to return an empty structure
+					if ($inputDataStructure['count'] == 0) {
+						$primaryProvider->initEmptyDataStructure();
+					}
+						// Otherwise pass structure to primary provider
+					else {
+						$primaryProvider->setDataStructure($inputDataStructure);
+					}
+				}
+					// Providers are not compatible, throw exception
+				else {
+					throw new Exception('Incompatible structures between primary and secondary providers', self::$errorIncompatiblePrimarySecondaryProviders);
+				}
 			}
 			return $primaryProvider;
 		}

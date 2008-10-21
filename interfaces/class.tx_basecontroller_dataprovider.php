@@ -73,6 +73,16 @@ interface tx_basecontroller_dataprovider {
 	public function loadData($data);
 
 	/**
+	 * This method prepares an empty data structure
+	 * i.e. with most properties undefined, an empty array for "records" and a "count" of 0
+	 * If appropriate it should also set some flag, so that getDataStructure() knows that it must return this empty structure
+	 * rather than calculate the full structure
+	 *
+	 * @return	void
+	 */
+	public function initEmptyDataStructure();
+
+	/**
 	 * This method assembles the data structure and returns it
 	 *
 	 * @return	array	standardised data structure

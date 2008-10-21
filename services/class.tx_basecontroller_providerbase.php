@@ -40,6 +40,8 @@ abstract class tx_basecontroller_providerbase extends t3lib_svbase implements tx
 	protected $providerData = array();
 	protected $filter = array(); // Data Filter structure
 	protected $structure = array(); // Input standardised data structure
+	protected $hasEmptyOutputStructure = false; // Set to true if empty structure was forced (see initEmptyDataStructure())
+	protected $outputStructure = array(); // Output standardised data structure
 
 // Data Provider interface methods
 // (implement only methods that make sense here)
@@ -66,6 +68,19 @@ abstract class tx_basecontroller_providerbase extends t3lib_svbase implements tx
 		else {
 			$this->providerData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 		}
+	}
+
+	/**
+	 * This method prepares an empty data structure
+	 * i.e. with most properties undefined, an empty array for "records" and a "count" of 0
+	 * If appropriate it should also set some flag, so that getDataStructure() knows that it must return this empty structure
+	 * rather than calculate the full structure
+	 *
+	 * @return	void
+	 */
+	public function initEmptyDataStructure() {
+		$this->hasEmptyOutputStructure = true;
+		$this->outputStructure = array('count' => 0, 'records' => array());
 	}
 
 	/**
