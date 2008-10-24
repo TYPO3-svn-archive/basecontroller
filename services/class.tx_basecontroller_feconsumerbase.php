@@ -34,14 +34,14 @@ require_once(t3lib_extMgm::extPath('basecontroller', 'services/class.tx_basecont
  * @subpackage	tx_basecontroller
  */
 abstract class tx_basecontroller_feconsumerbase extends tx_basecontroller_consumerbase {
-	protected $conf; // Contains the consumer's TypoScript
+	protected $conf = array(); // Contains the consumer's TypoScript
 
 	/**
 	 * This method is used to pass a TypoScript configuration (in array form) to the Data Consumer
 	 *
 	 * @param	array	$conf: TypoScript configuration for the extension
 	 */
-	public function setTypoScript($conf) {
+	public function setTypoScript(array $conf) {
 		$this->conf = $conf;
 	}
 
