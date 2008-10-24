@@ -44,6 +44,14 @@ abstract class tx_basecontroller_feconsumerbase extends tx_basecontroller_consum
 	public function setTypoScript($conf) {
 		$this->conf = $conf;
 	}
+
+	/**
+	 * This method returns the TypoScript key of the extension. This may be the extension key.
+	 * NOTE: if you use this method as is, don't forget to define the member variable $tsKey.
+	 */
+	public function getTypoScriptKey() {
+		return $this->tsKey;
+	}
 }
 
 
