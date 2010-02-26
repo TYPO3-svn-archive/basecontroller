@@ -21,7 +21,7 @@
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 *
-* $Id: class.tx_basecontroller_dataprovider.php 261 2009-12-22 11:03:35Z fsuter $
+* $Id$
 ***************************************************************/
 
 /**

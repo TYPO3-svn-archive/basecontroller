@@ -33,7 +33,7 @@ require_once(t3lib_extMgm::extPath('basecontroller', 'interfaces/class.tx_baseco
  * @package	TYPO3
  * @subpackage	tx_basecontroller
  *
- * $Id: class.tx_basecontroller_consumerbase.php 267 2010-01-13 15:50:30Z fsuter $
+ * $Id$
  */
 abstract class tx_basecontroller_consumerbase extends t3lib_svbase implements tx_basecontroller_dataconsumer {
 	protected $table; // Name of the table where the details about the consumer are stored

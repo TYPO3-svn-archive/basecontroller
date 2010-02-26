@@ -32,7 +32,7 @@ require_once(t3lib_extMgm::extPath('basecontroller', 'interfaces/class.tx_baseco
  * @package		TYPO3
  * @subpackage	tx_basecontroller
  *
- * $Id: class.tx_basecontroller_providerbase.php 261 2009-12-22 11:03:35Z fsuter $
+ * $Id$
  */
 abstract class tx_basecontroller_providerbase extends t3lib_svbase implements tx_basecontroller_dataprovider {
 	public $table; // Name of the table where the details about the provider are stored

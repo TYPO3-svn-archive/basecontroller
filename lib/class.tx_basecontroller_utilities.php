@@ -21,7 +21,7 @@
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 *
-* $Id: class.tx_basecontroller_utilities.php 34 2008-11-26 15:48:52Z fsuter $
+* $Id$
 ***************************************************************/
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
@@ -37,7 +37,7 @@
  * @package	TYPO3
  * @subpackage	tx_basecontroller
  *
- * $Id: class.tx_basecontroller_utilities.php 34 2008-11-26 15:48:52Z fsuter $
+ * $Id$
  */
 class tx_basecontroller_utilities {
 
