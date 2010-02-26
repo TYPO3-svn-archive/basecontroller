@@ -20,22 +20,31 @@
 *  GNU General Public License for more details.
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
-*
-* $Id$
 ***************************************************************/
 
-require_once(PATH_t3lib.'class.t3lib_svbase.php');
-//require_once(t3lib_extMgm::extPath('basecontroller', 'interfaces/class.tx_basecontroller_service.php'));
+require_once(PATH_t3lib . 'class.t3lib_svbase.php');
 
 /**
  * Base controller service. All Controller services should inherit from this class
  *
- * @author	Francois Suter (Cobweb) <typo3@cobweb.ch>
- * @package	TYPO3
+ * @author		Francois Suter (Cobweb) <typo3@cobweb.ch>
+ * @package		TYPO3
  * @subpackage	tx_basecontroller
+ *
+ * $Id$
  */
-//abstract class tx_basecontroller_base extends t3lib_svbase implements tx_basecontroller_service {
 abstract class tx_basecontroller_base extends t3lib_svbase {
+	protected $uid;
+
+	/**
+     * This method reads the information related to the controller from the database
+     *
+     * @param	integer	$id: primary key of the controller instance
+     */
+	public function loadData($id) {
+		$this->uid = $id;
+		// At this point in time, loading all the provider data from the database is not necessary
+    }
 }
 
 
