@@ -85,6 +85,28 @@ class tx_basecontroller_utilities {
 			throw new Exception('Invalid filter provided. Could not calculate hash.');
 		}
 	}
+
+	/**
+	 * This method reads a configuration field and returns a cleaned up set of configuration statements
+	 * ignoring blank lines and comments
+	 * Each line in the configuration field will correspond to an item in the returned array
+	 * Comments are marked by lines starting with # or //
+	 *
+	 * @param	string	$text: full configuration text
+	 * @return	array	List of configuration statements
+	 */
+	public static function parseConfigurationField($text) {
+		$lines = array();
+			// Explode all the lines on the return character
+		$allLines = t3lib_div::trimExplode("\n", $text, 1);
+		foreach ($allLines as $aLine) {
+				// Take only line that don't start with # or // (comments)
+			if (strpos($aLine, '#') !== 0 && strpos($aLine, '//') !== 0) {
+				$lines[] = $aLine;
+			}
+		}
+		return $lines;
+	}
 }
 
 
